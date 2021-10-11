@@ -1,89 +1,26 @@
-﻿using System;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Ass2
+namespace TCT_Assignment.Helpdesk
 {
-    class Program
+    public class Program
     {
-
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-
-            try
-            {
-
-                //Case 1:  
-
-                //SubMain(0);
-
-                //Case 2:  
-
-                SubMain(1);
-
-
-
-            }
-            
-            catch (ArgumentException a)
-            {
-
-                Console.WriteLine("ArgumentException");
-
-                Console.ReadLine();
-
-            }
-            
-            catch (DivideByZeroException d)
-            {
-
-                Console.WriteLine("DivideByZeroException ");
-
-                Console.ReadLine();
-
-            }
-            catch (Exception e)
-            {
-
-                Console.WriteLine("Exception");
-
-                Console.ReadLine();
-
-            }
-
-
-
-
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static void SubMain(int i)
-        {
-           
-            if (i <= 0)
-
-                throw new ArgumentException("i is less than zero");
-
-
-
-            try
-            {
-
-                int c = i / 0;
-
-            }
-            catch (DivideByZeroException d)
-            {
-                //todo: need to learn exception handlning types of exceptions in dotnet
-                throw new Exception();
-                //throw;
-                //throw d;
-
-            }
-
-
-
-        }
-
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
-
-
-
 }
